@@ -11,15 +11,10 @@ pipeline {
      */
     docker { 
       image 'ghcr.io/iarsystems/arm:9.70.1-st'
-      args '-e HOME=${WORKSPACE}'
+      args '-e HOME=${WORKSPACE} -e IAR_LMS_BEARER_TOKEN=${IAR_LMS_BEARER_TOKEN}'
     }
   }
-  /* The environment variables: change it according to your needs.
-     The IAR_LMS_BEARER_TOKEN is retrieved from Jenkins' Credentials.
-     (https://www.jenkins.io/doc/book/security/credentials/#working-with-credentials)
-   */
   environment {
-    IAR_LMS_BEARER_TOKEN = credentials('iar_ci_token')
     TARGET_DIR           = "targets/arm"
     BUILD_TYPE           = 'Release'
     CAPACITY             = '8'
